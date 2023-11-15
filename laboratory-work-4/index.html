@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Простой чат</title>
+</head>
+<body>
+  <div id="entry" style="display: block;">
+    <input type="text" id="username" placeholder="Введите ваше имя">
+    <button onclick="joinChat()">Присоединиться</button>
+  </div>
+
+  <div id="chat" style="display: none;">
+    <div id="messages"></div>
+    <input type="text" id="message" placeholder="Введите сообщение">
+    <button onclick="sendMessage()">Отправить</button>
+  </div>
+
+  <!-- <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script> -->
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    window.addEventListener('load', () => {
+      // const socket = io('http://localhost:3000');
+    const socket = io();
+    const entryDiv = document.getElementById('entry');
+    const chatDiv = document.getElementById('chat');
+    const messagesDiv = document.getElementById('messages');
+    const usernameInput = document.getElementById('username');
+    const messageInput = document.getElementById('message');
+
+    function joinChat() {
+      console.log('1')
+      const username = usernameInput.value;
+      if (username) {
+        socket.emit('join', username);
+        entryDiv.style.display = 'none';
+        chatDiv.style.display = 'block';
+      }
+    }
+
+    function sendMessage() {
+      const message = messageInput.value;
+      if (message) {
+        socket.emit('chat-message', message);
+        messageInput.value = '';
+      }
+    }
+
+    socket.on('user-connected', (username) => {
+      const connectedMessage = document.createElement('div');
+      connectedMessage.textContent = `${username} присоединился к чату`;
+      messagesDiv.appendChild(connectedMessage);
+    });
+
+    socket.on('user-disconnected', (username) => {
+      const disconnectedMessage = document.createElement('div');
+      disconnectedMessage.textContent = `${username} покинул чат`;
+      messagesDiv.appendChild(disconnectedMessage);
+    });
+
+    socket.on('message', (data) => {
+      const messageElement = document.createElement('div');
+      messageElement.textContent = `${data.username}: ${data.message}`;
+      messagesDiv.appendChild(messageElement);
+    });
+
+    });
+  </script>
+</body>
+</html>

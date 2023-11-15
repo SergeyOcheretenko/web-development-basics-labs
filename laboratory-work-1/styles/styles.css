@@ -1,0 +1,62 @@
+body {
+  padding: 2% 20%;
+}
+
+/* GENERAL STYLES */
+
+.top-block {
+  background-color: #347ECB;
+  width: 100%;
+  text-align: center;
+  padding: 1% 0%;
+}
+
+.left-block {
+  background-color: #bbd4ed;
+  padding: 20% 0%;
+  width: 20%;
+}
+
+.right-block {
+  background-color: #ade4f6;
+  width: 80%;
+  padding: 20% 0%;
+}
+
+.right-block > h1,
+.left-block > h1 {
+  margin-left: 35%;
+}
+
+.bottom-block {
+  background-color: #f3f2b7;
+  width: 100%;
+  padding: 1% 0%;
+  text-align: center;
+}
+
+/* FLEX SECTION */
+
+.flex-section {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10%;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+/* FLOAT SECTION */
+.float-section > .left-block {
+  float: left;
+}
+
+.float-section > .right-block {
+  float: right;
+}
+
+.clear-block {
+  clear: both;
+}
