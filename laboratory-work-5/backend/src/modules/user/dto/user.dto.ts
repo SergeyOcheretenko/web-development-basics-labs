@@ -3,7 +3,7 @@ import { User, UserRole } from '../../../database/entities/User';
 export class UserDto {
   public readonly id: number;
   public readonly firstName: string;
-  public readonly secondName: string;
+  public readonly lastName: string;
   public readonly email: string;
   public readonly passwordHash: string;
   public readonly role: UserRole;
@@ -12,7 +12,7 @@ export class UserDto {
     return {
       id: user.id,
       firstName: user.firstName,
-      secondName: user.secondName,
+      lastName: user.lastName,
       email: user.email,
       passwordHash: user.passwordHash,
       role: user.role,

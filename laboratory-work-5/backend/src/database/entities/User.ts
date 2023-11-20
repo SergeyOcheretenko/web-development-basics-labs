@@ -14,8 +14,8 @@ export class User extends Model<User> {
   @Column({ field: 'first_name', type: 'text' })
   firstName: string;
 
-  @Column({ field: 'second_name', type: 'text' })
-  secondName: string;
+  @Column({ field: 'last_name', type: 'text' })
+  lastName: string;
 
   @Column({ field: 'email', type: 'text' })
   email: string;
