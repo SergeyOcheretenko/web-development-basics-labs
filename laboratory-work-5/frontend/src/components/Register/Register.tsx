@@ -1,4 +1,4 @@
-import { Button, Input, Typography } from '@mui/material';
+import { Button, FormControl, Input, InputLabel, MenuItem, Select, Typography } from '@mui/material';
 import { useState } from 'react';
 import { Page } from '../common/Page/Page';
 import { useNavigate } from 'react-router-dom';
@@ -40,7 +40,7 @@ export function Register(): JSX.Element {
       flexDirection: "column",
       rowGap: "2rem"
     }}>
-      <Typography variant='h5'>Login</Typography>
+      <Typography variant='h5'>Register</Typography>
       <Input
         type='email'
         placeholder='Email' 
@@ -65,12 +65,18 @@ export function Register(): JSX.Element {
         value={lastName} 
         onChange={(event) => setLastName(event.target.value)} 
       />
-      <Input
-        autoComplete='off'
-        placeholder='Role' 
-        value={role} 
-        onChange={(event) => setRole(event.target.value)} 
-      />
+      <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+        <InputLabel id="role-label">Role</InputLabel>
+        <Select 
+          labelId="role-label" 
+          label='Role' 
+          value={role} 
+          onChange={(event) => setRole(event.target.value as string)}
+        >
+          <MenuItem value='admin'>Admin</MenuItem>
+          <MenuItem value='user'>User</MenuItem>
+        </Select>
+      </FormControl>
       <Button onClick={submit}>Submit</Button>
     </div>
   </Page>;
