@@ -36,4 +36,8 @@ export class UserService {
     const user = await this.userRepository.findOne<User>({ where: { id } });
     return user ? UserDto.fromEntity(user) : null;
   }
+
+  async deleteOneById(id: number): Promise<void> {
+    await this.userRepository.destroy({ where: { id } });
+  }
 }

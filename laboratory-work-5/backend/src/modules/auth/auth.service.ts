@@ -36,17 +36,14 @@ export class AuthService {
     return match;
   }
 
-  public async login(loginRequest: LoginRequest) {
-    const user = await this.userService.findOneByEmail(loginRequest.email);
-    if (!user) {
-      throw new UnauthorizedException('Invalid user credentials');
-    }
+  public async login({ email, password }: LoginRequest) {
+    const user = await this.validateUser(email, password);
 
     const token = await this.generateToken(user);
     return { user, token };
   }
 
-  private async generateToken(user: UserDto) {
+  private async generateToken(user: Omit<UserDto, 'passwordHash'>) {
     const token = await this.jwtService.signAsync(user);
     return token;
   }
