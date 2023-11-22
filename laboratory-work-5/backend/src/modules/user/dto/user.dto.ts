@@ -7,6 +7,9 @@ export class UserDto {
   public readonly email: string;
   public readonly passwordHash: string;
   public readonly role: UserRole;
+  public readonly phoneNumber: string;
+  public readonly group: string;
+  public readonly variant: string;
 
   static fromEntity(user: User): UserDto {
     return {
@@ -16,6 +19,9 @@ export class UserDto {
       email: user.email,
       passwordHash: user.passwordHash,
       role: user.role,
+      phoneNumber: user.phoneNumber,
+      group: user.group,
+      variant: user.variant,
     };
   }
 }

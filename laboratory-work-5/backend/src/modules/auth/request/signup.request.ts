@@ -18,6 +18,18 @@ export class SignUpRequest {
   @IsNotEmpty()
   password: string;
 
+  @IsString()
+  @IsNotEmpty()
+  phoneNumber: string;
+
+  @IsString()
+  @IsNotEmpty()
+  group: string;
+
+  @IsString()
+  @IsNotEmpty()
+  variant: string;
+
   @IsEnum(UserRole)
   @IsNotEmpty()
   role: UserRole;

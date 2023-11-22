@@ -20,6 +20,15 @@ export class User extends Model<User> {
   @Column({ field: 'email', type: 'text' })
   email: string;
 
+  @Column({ field: 'phone_number', type: 'text' })
+  phoneNumber: string;
+
+  @Column({ field: 'group', type: 'text' })
+  group: string;
+
+  @Column({ field: 'variant', type: 'text' })
+  variant: string;
+
   @Column({ field: 'password_hash', type: 'text' })
   passwordHash: string;
 

@@ -8,6 +8,7 @@ export function Login(): JSX.Element {
 
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const [errorMessage, setErrorMessage] = useState<string>('');
 
   const submit = () => {
     const url = process.env.REACT_APP_API_URL + '/auth/login';
@@ -24,6 +25,10 @@ export function Login(): JSX.Element {
         if (data.token) {
           localStorage.setItem('token', data.token);
           navigate('/dashboard');
+        }
+
+        if (data.message) {
+          setErrorMessage(data.message);
         }
       })
       .catch((error) => {
@@ -42,15 +47,23 @@ export function Login(): JSX.Element {
         type='email'
         placeholder='Email' 
         value={email} 
-        onChange={(event) => setEmail(event.target.value)} 
+        onChange={(event) => {
+          setEmail(event.target.value);
+          setErrorMessage('');
+        }}
       />
       <Input
         type='password'
         placeholder='Password' 
         value={password} 
-        onChange={(event) => setPassword(event.target.value)} 
+        onChange={(event) => {
+          setPassword(event.target.value);
+          setErrorMessage('');
+        }}
       />
       <Button onClick={submit}>Submit</Button>
+
+      {errorMessage && <Typography variant='body1' style={{ color: 'red' }}>{errorMessage}</Typography>}
     </div>
   </Page>;
 }
